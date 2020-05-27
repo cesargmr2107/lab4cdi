@@ -12,7 +12,6 @@ import java.util.concurrent.atomic.LongAdder;
  *
  * @author cesarino
  */
-
 class MyLongAdderTask implements Runnable {
 
     private LongAdder counter;
@@ -75,17 +74,20 @@ class MySynchronizedAtomicOperations implements Runnable {
 
     @Override
     public void run() {
-       // try {
+        try {
             for (int i = 0; i < factor; i++) {
-               // Thread.sleep((long) Math.random() * 100);
-                p.incrementAndGet();
-                q.incrementAndGet();
-                q.addAndGet(p.get());
+                Thread.sleep((long) Math.random() * 1000);
+                synchronized (p) {
+                    p.incrementAndGet();
+                    synchronized (q) {
+                        q.incrementAndGet();
+                        q.addAndGet(p.get());
+                    }
+                }
             }
-      //  } catch (InterruptedException ex) {
-     //       System.err.printf("[%s] interrupted!\n", Thread.currentThread().getName());
-     //   }
+        } catch (InterruptedException ex) {
+            System.err.printf("[%s] interrupted!\n", Thread.currentThread().getName());
+        }
     }
 
 }
-
