@@ -18,8 +18,8 @@ public class LAB4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Expected result: " + testAtomicOperations(1, 10000000));
-        System.out.println("Real result: " + testAtomicOperations(100000, 100));
+        System.out.println("Expected result: " + testAtomicOperations(1, 1000000));
+        System.out.println("Real result: " + testAtomicOperations(10000, 100));
     }
 
     private static int testAtomicOperations(int nThreads, int factor) {
